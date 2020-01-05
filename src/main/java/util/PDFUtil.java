@@ -19,14 +19,13 @@ import edu.emory.mathcs.backport.java.util.Collections;
 import tests.GetLinesFromPDF1;
 
 public class PDFUtil extends PDFTextStripper {
-	
+
 	static List<String> lines = new ArrayList<String>();
 
 	public PDFUtil() throws IOException {
 	}
 
-	public static TreeMap<String, String> getGroup1FromPDF(String fileName)
-			throws InvalidPasswordException, IOException {
+	public List<String> getListFromPDF(String fileName) throws InvalidPasswordException, IOException {
 
 		PDDocument document = null;
 		String line1 = null;
@@ -41,88 +40,12 @@ public class PDFUtil extends PDFTextStripper {
 			stripper.writeText(document, dummy);
 			// System.out.println(lines);
 
-			// ***********************************************************
-			List<String> list3 = lines.subList(1, 5);
-			Collections.sort(list3);
-			HashMap<String, String> map1 = new HashMap<String, String>();
-			int i = 0;
-			map1.put("loanNumber", list3.get(i));
-			map1.put("loanAmount", "400");
-			map1.put("loanPurchase", "discounr");
-			map1.put("color", "green");
-			//map1.put("q", list3.get(i + 4));
-			/*map1.put("b", list3.get(i + 5));
-			map1.put("j", list3.get(i + 6));
-			map1.put("w", list3.get(i + 7));
-			map1.put("i", list3.get(i + 8));
-			map1.put("e", list3.get(i + 9));
-			map1.put("h", list3.get(i + 10));
-			map1.put("u", list3.get(i + 11));*/
-
-			sorted = new TreeMap<>();
-			// Copy all data from hashMap into TreeMap
-			sorted.putAll(map1);
-			// Display the TreeMap which is naturally sorted
-			//System.out.println(sorted.get("e"));
-
 		} finally {
 			if (document != null) {
 				document.close();
 			}
 		}
-
-		return sorted;
-
-	}
-
-	public static TreeMap<String, String> getGroup2FromPDF(String fileName)
-			throws InvalidPasswordException, IOException {
-
-		PDDocument document = null;
-		String line1 = null;
-		TreeMap sorted;
-		try {
-			document = PDDocument.load(new File(fileName));
-			PDFTextStripper stripper = new PDFUtil();
-			stripper.setSortByPosition(true);
-			stripper.setStartPage(0);
-			stripper.setEndPage(document.getNumberOfPages());
-			Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream());
-			stripper.writeText(document, dummy);
-			// System.out.println(lines);
-
-			// ***********************************************************
-			List<String> list3 = lines.subList(1, 5);
-			Collections.sort(list3);
-			HashMap<String, String> map1 = new HashMap<String, String>();
-			int i = 0;
-			map1.put("a", list3.get(i));
-			map1.put("f", list3.get(i + 1));
-			map1.put("w", list3.get(i + 2));
-			map1.put("t", list3.get(i + 3));
-			map1.put("q", list3.get(i + 4));
-			map1.put("b", list3.get(i + 5));
-			map1.put("j", list3.get(i + 6));
-			map1.put("w", list3.get(i + 7));
-			map1.put("i", list3.get(i + 8));
-			map1.put("e", list3.get(i + 9));
-			map1.put("h", list3.get(i + 10));
-			map1.put("u", list3.get(i + 11));
-
-			sorted = new TreeMap<>();
-			// Copy all data from hashMap into TreeMap
-			sorted.putAll(map1);
-			// Display the TreeMap which is naturally sorted
-			System.out.println(sorted.get("e"));
-
-		} finally {
-			if (document != null) {
-				document.close();
-			}
-		}
-
-		return sorted;
-
+		return lines;
 	}
 
 	@Override
