@@ -15,6 +15,14 @@ public class PDFValidationPage {
 	public TreeMap<String, String> group1Vlidation(String fileName) throws IOException {
 		pdf = new PDFUtil();
 		List<String> list1 = pdf.getListFromPDF(fileName);
+		for(String item:list1)
+		{
+			System.out.println(item);
+		}
+		//System.out.println(list1);
+		int index = list1.indexOf("PS HRMS CR  ");
+		System.out.println(index);
+		
 		List<String> list3 = list1.subList(1, 5);
 		Collections.sort(list3);
 		HashMap<String, String> map1 = new HashMap<String, String>();
